@@ -27,8 +27,8 @@ let colors_name = "metacosm"
 " Primary (hyper/selected/colored background)
 " -----------------------------------------------------------------------------
 " Search
-hi IncSearch guibg=black guifg=cyan
-hi Search guibg=black guifg=cyan
+hi IncSearch guibg=black guifg=red gui=underline
+hi Search guibg=black guifg=red gui=underline
 
 " Visual 
 hi Visual guibg=yellow guifg=black
