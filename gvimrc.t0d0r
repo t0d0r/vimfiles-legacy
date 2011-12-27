@@ -1,0 +1,39 @@
+" Create .gvimrc to use these settings
+" ln -s ~/.vim/gvimrc.t0d0r ~/.gvimrc
+"
+
+" colorscheme ir_black
+" colorscheme vividchalk
+" colorscheme lingodirector
+" colorscheme koehler
+" colorscheme evening
+" colorscheme peaksea
+" colorscheme jammy
+" colorscheme metacosm
+colorscheme t0d0r
+
+set ts=2 sts=2 sw=2 expandtab
+set number
+set guioptions-=T
+"set guifont=Andale\ Mono:h14
+"set guifont=Monaco:h13
+set guifont=Terminus:h18
+set nowrap
+set hlsearch
+set laststatus=2
+set wildmenu " change style when use <tab>
+set hidden
+"set ignorecase
+set smartcase
+set hlsearch
+set incsearch "highlight text when type text
+set nobackup
+set transparency=0 "enable transparency for advanced rendering
+"set guioptions=aAce
+setlocal spell
+
+" this highlight the white spaces in empty lines or at the end of lines
+set list
+set listchars=trail:.
+
+au FileType ruby compiler ruby
