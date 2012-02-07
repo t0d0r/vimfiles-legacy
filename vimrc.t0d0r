@@ -1,0 +1,110 @@
+if has("gui_running")
+    "set fuoptions=maxvert,maxhorz
+    "au GUIEnter * set fullscreen
+    source ~/.vim/vimrc " enable all goodies for GUI
+endif
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+"
+" Backups & Files
+" Fix crontab temp file problem: 'must be edited in place'
+if expand('%:r:r') =~? "crontab"
+  set nobackup
+  colorscheme zellner
+else
+  " Backups & Files
+  set backup                     " Enable creation of backup file.
+  set backupdir=~/.vim/backups " Where backups will go.
+  set directory=~/.vim/tmp//     " Where temporary files will go.
+endif
+
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+    au!
+
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+
+  augroup END
+
+else
+
+  set autoindent    " always set autoindenting on
+
+endif " has("autocmd")
+
+" settings for viewoutput.vim
+let g:viewoutput_newbuffer="tabedit"
+
+set noerrorbells
+set visualbell
+set nocompatible
+set history=500
+set backspace=indent,eol,start
+set ruler         " show the cursor position all the time
+set showcmd       " display incomplete commands
+set incsearch     " do incremental searching
+" add dictionary to CTRL-P completion, and remove include search
+set lcs=tab:\ \ ,eol:$,trail:~,extends:>,precedes:<
+" set dictionary=/usr/share/dict/words
+set complete+=k
+set complete-=i
+
+set statusline=%02n:%<%f
+set statusline+=%#error#
+set statusline+=%{StatuslineTabWarning()}
+set statusline+=%*
+set statusline+=%h%m%r%=%-14.(%l,%c%V%)\ %P
+
+" highlightings
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+" maps to work with ruby
+map <F7>  :ccl<CR>
+"map <F8> :make %<CR>
+" executing ruby code in current windowd
+" don't forget to set filetype to ruby with :FR
+map <F8>  :RunRuby<CR>
+map <D-r> :RunRuby<CR>
+imap <D-r> <Esc>:RunRuby<CR>
+map <F9>  :copen<CR>
+map ,R    :compiler ruby<CR>
+map ,r    :make %<CR>
+" edit and reload .vimrc
+map ,v    :sp ~/.vimrc<CR>
+map ,V    :source ~/.vimrc<CR>
+map <D-/> :call NERDComment(0, "toggle")<CR>
+imap <D-/> :call NERDComment(0, "toggle")<CR>
+vmap <D-/> :call NERDComment(0, "toggle")<CR>
+
+" Leader ususaly is \
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+" clear recent search highlighting with space
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <F5> :GundoToggle<CR>
+
+command! FR set filetype=ruby
+
+" save files as root without prior sudo
+cmap w!! w !sudo tee % >/dev/null
