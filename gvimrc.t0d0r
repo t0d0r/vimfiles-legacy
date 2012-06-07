@@ -49,6 +49,7 @@ endfunction
 command! FR set filetype=ruby
 command! DELL set guifont=Terminus:h24 " set big font for using in my 20" DELL display
 command! ENVY set guifont=Envy\ Code\ R:h18 " same as above but font is different
+command! MONODELL set guifont=monofur:h24
 command! NORMAL call GUInormal()
 command! Zmanual set foldmethod=manual
 command! Zindent set foldmethod=indent

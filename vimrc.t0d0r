@@ -102,9 +102,18 @@ vmap <D-/> :call NERDComment(0, "toggle")<CR>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " clear recent search highlighting with space
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
 nnoremap <F5> :GundoToggle<CR>
 
 command! FR set filetype=ruby
 
 " save files as root without prior sudo
 cmap w!! w !sudo tee % >/dev/null
+
+let NERDTreeChDirMode=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI=1
+let NERDTreeShowBookmarks=1
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%80v.*/
