@@ -68,6 +68,9 @@ set lcs=tab:\ \ ,eol:$,trail:~,extends:>,precedes:<
 set complete+=k
 set complete-=i
 
+"set spell
+set spelllang=en,bg
+
 set statusline=%02n:%<%f
 set statusline+=%#error#
 set statusline+=%{StatuslineTabWarning()}
